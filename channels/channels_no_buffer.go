@@ -15,7 +15,7 @@ func main() {
 		done <- true
 	}()
 
-	fmt.Println("def called")
+	fmt.Println("definitely called")
 
 	<-done
 }
