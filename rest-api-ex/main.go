@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./burgers"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"log"
@@ -15,6 +16,8 @@ func main() {
 	router := httprouter.New()
 
 	router.GET("/", Index)
+
+	router.GET("/burgers", burgers.Index)
 
 	log.Fatal(http.ListenAndServe(":3000", router))
 }
