@@ -19,5 +19,8 @@ func main() {
 
 	router.GET("/burgers", burgers.Index)
 
+	router.GET("/burgers/:id", burgers.Show)
+
+	fmt.Println("listening on port :3000")
 	log.Fatal(http.ListenAndServe(":3000", router))
 }

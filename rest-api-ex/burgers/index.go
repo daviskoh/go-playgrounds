@@ -8,8 +8,8 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	burgers := []Burger{
-		Burger{Patty: "beef"},
-		Burger{Patty: "veggie"},
+		Burger{Id: 1, Patty: "beef"},
+		Burger{Id: 2, Patty: "veggie"},
 	}
 
 	if err := json.NewEncoder(w).Encode(burgers); err != nil {

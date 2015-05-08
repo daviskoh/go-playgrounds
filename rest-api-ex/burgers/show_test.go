@@ -3,6 +3,7 @@ package burgers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/julienschmidt/httprouter"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -10,8 +11,10 @@ import (
 )
 
 func TestShow(t *testing.T) {
+	burgerId := "4"
+
 	// build url
-	url := "http://localhost:3000/burgers/:id"
+	url := "http://localhost:3000/burgers/" + burgerId
 	// issue request
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -19,7 +22,10 @@ func TestShow(t *testing.T) {
 	}
 
 	resp := httptest.NewRecorder()
-	Show(resp, req, nil)
+	params := httprouter.Params{
+		{Key: "id", Value: burgerId},
+	}
+	Show(resp, req, params)
 
 	// investigate using constants
 	if resp.Code != 200 {
@@ -42,7 +48,11 @@ func TestShow(t *testing.T) {
 
 	// check body
 	if burger.Patty != "beef" {
-		t.Errorf(fmt.Sprintf("body.patty does not equal beef"))
+		t.Errorf(fmt.Sprintf("body.Patty does not equal beef"))
+	}
+
+	if burger.Id != 4 {
+		t.Errorf(fmt.Sprintf("body.Id does not equal 4"))
 	}
 
 	fmt.Printf("%+v", resp)
