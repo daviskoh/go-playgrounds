@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/codegangsta/negroni"
 	"github.com/daviskoh/go-playgrounds/rest-api-ex/burgers"
 	"github.com/julienschmidt/httprouter"
-	"log"
 	"net/http"
 )
 
@@ -21,6 +21,8 @@ func main() {
 
 	router.GET("/burgers/:id", burgers.Show)
 
-	fmt.Println("listening on port :3000")
-	log.Fatal(http.ListenAndServe(":3000", router))
+	server := negroni.Classic()
+	server.UseHandler(router)
+
+	server.Run(":3000")
 }
