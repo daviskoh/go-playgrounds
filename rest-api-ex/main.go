@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./burgers"
 	"fmt"
+	"github.com/daviskoh/go-playgrounds/rest-api-ex/burgers"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
